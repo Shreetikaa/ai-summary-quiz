@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="topbar">
+  <div>
+    <div class="page-title">PDF Summarizer</div>
+    <div class="page-subtitle">Upload PDF → generate summary → generate quiz.</div>
+  </div>
+</div>
+
+<div class="card p-3">
+  <div class="section-label">Upload PDF</div>
+  <div class="step"><div class="dot">1</div><div>Select a PDF document</div></div>
+
+  <form id="pdfForm" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label class="form-label">PDF file</label>
+      <input id="pdfFile" type="file" name="file" class="form-control" accept=".pdf" required>
+    </div>
+    <button id="pdfBtn" type="submit" class="btn btn-primary w-100">Generate Summary</button>
+  </form>
+
+  <div class="divider"></div>
+
+  <div id="pdfStatus"></div>
+
+  <div id="summaryBlock" class="mt-3" style="display:none;">
+    <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+      <span class="pill" id="usedPill" style="display:none;"></span>
+      <span class="pill" id="sourcePill" style="display:none;"></span>
+    </div>
+
+    <div class="result-box">
+      <div class="section-label mb-2">Summary</div>
+      <p id="summaryText" class="mb-0"></p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="step"><div class="dot">2</div><div>Choose quiz difficulty and number of questions</div></div>
+
+    <div class="row g-2 align-items-end">
+      <div class="col-md-4">
+        <label class="form-label">Difficulty</label>
+        <select id="difficulty" class="form-select">
+          <option value="easy">Easy</option>
+          <option value="mid" selected>Mid</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Number of Questions</label>
+        <select id="numQuestions" class="form-select">
+          <option value="5" selected>5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <button id="genQuizBtn" class="btn btn-dark w-100" disabled>Generate Quiz</button>
+      </div>
+    </div>
+
+    <div class="mt-3 text-muted" id="quizMeta" style="display:none;"></div>
+
+    <div id="quizArea" class="mt-3"></div>
+
+    <div class="d-flex gap-2">
+      <button id="submitQuizBtn" class="btn btn-primary mt-2" style="display:none;">Submit Answers</button>
+      <button id="resetQuizBtn" class="btn btn-outline-secondary mt-2" style="display:none;">Reset</button>
+    </div>
+
+    <div id="scoreArea" class="mt-3"></div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/pdf.js') }}"></script>
+{% endblock %}

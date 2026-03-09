@@ -1,0 +1,16 @@
+# Environment variables
+.env
+
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Uploads and run results
+uploads/
+runs/
+
+# Mac system files
+.DS_Store
